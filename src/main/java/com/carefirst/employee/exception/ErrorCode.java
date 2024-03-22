@@ -1,0 +1,14 @@
+package com.carefirst.employee.exception;
+
+public enum ErrorCode {
+    ERROR,
+    INVALID_REQUEST_DATA,
+    CONSTRAINT_VIOLATION,
+    NOT_FOUND,
+    DUPLICATE_RECORD,
+    METHOD_NOT_SUPPORTED,
+    UNSUPPORTED_REQUEST_FORMAT,
+    MISMATCHED_PARAMETERS,
+    INTERNAL,
+    VALIDATION
+}
