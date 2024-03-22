@@ -80,7 +80,7 @@ public class EmployeeController {
 	@Operation(summary = "Add an employee")
 	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	public ResponseEntity<Employee> createEmployee(@RequestBody @Valid Employee employee,
+	public ResponseEntity<Employee> createEmployee(@RequestBody @Validated Employee employee,
 			HttpServletRequest httpServletRequest) {
 		logger.info(OPERATION_NAME, "createEmployee");
 

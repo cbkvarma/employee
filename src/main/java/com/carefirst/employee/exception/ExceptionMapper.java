@@ -1,8 +1,9 @@
 package com.carefirst.employee.exception;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.tomcat.util.buf.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -49,15 +50,13 @@ public class ExceptionMapper {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     //@ResponseStatus(HttpStatus.BAD_REQUEST)
     //@ResponseBody
-    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
+    public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        List<String> errorMessages = new ArrayList<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
+            errorMessages.add(((FieldError) error).getField() + " - " + error.getDefaultMessage());
         });
-        //Error error = new Error(ErrorCategory.VALIDATION, ErrorCode.INVALID_REQUEST_DATA, ex.getMessage());
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        Error error = new Error(ErrorCategory.VALIDATION, ErrorCode.INVALID_REQUEST_DATA, StringUtils.join(errorMessages, ','));
+        return new ResponseEntity<Error>(error, HttpStatus.BAD_REQUEST);
     }
 
 }

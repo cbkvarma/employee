@@ -22,7 +22,7 @@ public class Employee {
 	private String lastName;
 	
 	@NotNull
-	@Email
+	@Email(message = "Invalid Email Address")
 	private String emailAddress;
 	
 	private String phone;
@@ -132,8 +132,9 @@ public class Employee {
 	}
 	
 	@AssertTrue(message = "Invalid Location")
+	@JsonIgnore
 	public boolean isValidLocation() {
-		if(this.location.contains("DC") || this.location.contains("VA") || this.location.contains("MD")) {
+		if(this.location == null || this.location.contains("DC") || this.location.contains("VA") || this.location.contains("MD")) {
 			return true;
 		}
 		return false;

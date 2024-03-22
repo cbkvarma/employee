@@ -49,6 +49,7 @@ public class EmployeeControllerTest {
     	mockEmployee.setFirstName("FirstName");
     	mockEmployee.setLastName("LastName");
     	mockEmployee.setEmailAddress("test@test.com");
+    	mockEmployee.setLocation("DC");
     	mockEmployee.setPhone("1234567890");
     }
     
@@ -61,7 +62,7 @@ public class EmployeeControllerTest {
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		System.out.println(result.getResponse());
 		
-		String expected = "[{\"employeeId\":1,\"firstName\":\"FirstName\",\"lastName\":\"LastName\",\"emailAddress\":\"test@test.com\",\"phone\":\"1234567890\"}]";
+		String expected = "[{\"employeeId\":1,\"firstName\":\"FirstName\",\"lastName\":\"LastName\",\"location\":\"DC\",\"emailAddress\":\"test@test.com\",\"phone\":\"1234567890\"}]";
 
 		JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
     }
